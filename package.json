@@ -1,0 +1,40 @@
+{
+  "name": "medione",
+  "version": "1.0.0",
+  "description": "EOI Project",
+  "main": "app.js",
+  "scripts": {
+    "nodemon": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acontrerasrosario/MediOne.git"
+  },
+  "author": "Grupo 4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acontrerasrosario/MediOne/issues"
+  },
+  "homepage": "https://github.com/acontrerasrosario/MediOne#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.31",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "pg": "^8.4.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "swagger-jsdoc": "^4.2.3",
+    "swagger-ui-express": "^4.1.4",
+    "underscore": "^1.11.0"
+  }
+}
