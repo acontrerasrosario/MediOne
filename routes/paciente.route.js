@@ -2,18 +2,28 @@ const { Router } = require('express');
 const router = Router();
 const 
 { 
-    get_patient_info
+    obtener_informacion_paciente
 } = require('../controller/paciente.controller');
 
 /**
  * @swagger
- * /api/paciente/get_patient_info:
+ * /api/paciente/obtener_informacion_paciente:
  *  get: 
  *   description: Usado para solicitar informacion de un paciente
+ *   parameters:
+ *      -   in: path
+ *          name: IDENTIFICACION
+ *          required: true,
+ *          schema:
+ *              type: varchar
+ *              minimun: 6 
+ *          description: Cedula/Pasaporte del paciente
  *   responses:
  *      '200':
- *        description: Una respuesta satisfactoria
+ *          description: Una respuesta satisfactoria
+ *      '404':
+ *          description: No se encontro registros      
  */
-router.get('/get_patient_info' , get_patient_info);
+router.post('/obtener_informacion_paciente/' , obtener_informacion_paciente);
 
 module.exports = router;

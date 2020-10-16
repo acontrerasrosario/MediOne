@@ -1,35 +1,57 @@
 const Sequelize = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
+const { pacientes } = require('./pacientes.model');
+const { motivo_consulta } = require('./motivo_consulta.model');
+
 
 const consulta = sequelize.define('consulta', {
-    secuencia: {
+    SECUENCIA: {
         type         : Sequelize.INTEGER,
         primaryKey   : true,
         autoIncrement: true
     },
-    fecha: {
+    FECHA: {
         type     : Sequelize.DATE,
         allowNull: false
     },
-    temperatura       : Sequelize.FLOAT,
-    peso              : Sequelize.FLOAT,
-    respiracion       : Sequelize.FLOAT,
-    estatura          : Sequelize.FLOAT,
-    presion_arterial  : Sequelize.FLOAT,
-    otros_datos       : Sequelize.TEXT,
-    diagnostico       : Sequelize.TEXT,
-    enfermedad        : Sequelize.STRING(25),
-    fecha_creacion    : Sequelize.DATE,
-    id_paciente       : Sequelize.INTEGER,
-    nivel_glucosa     : Sequelize.INTEGER,
-    globulos_rojos    : Sequelize.FLOAT,
-    globulos_blancos  : Sequelize.FLOAT,
-    globulos_blancos  : Sequelize.FLOAT,
-    user_id           : Sequelize.INTEGER,
-    id_motivo_consulta: Sequelize.INTEGER,
+    TEMPERATURA       : Sequelize.FLOAT,
+    PESO              : Sequelize.FLOAT,
+    RESPIRACION       : Sequelize.FLOAT,
+    ESTATURA          : Sequelize.FLOAT,
+    PRESION_ARTERIAL  : Sequelize.FLOAT,
+    OTROS_DATOS       : Sequelize.TEXT,
+    DIAGNOSTICO       : Sequelize.TEXT,
+    ENFERMEDAD        : Sequelize.STRING(25),
+    FECHA_CREACION    : Sequelize.DATE,
+    ID_PACIENTE       : Sequelize.INTEGER,
+    NIVEL_GLUCOSA     : Sequelize.INTEGER,
+    GLOBULOS_ROJOS    : Sequelize.FLOAT,
+    GLOBULOS_BLANCOS  : Sequelize.FLOAT,
+    USER_ID           : Sequelize.INTEGER,
+    ID_MOTIVO_CONSULTA: Sequelize.INTEGER,
 },{
     timestamps: false,
-    tableName: 'consulta'
+    tableName: 'CONSULTA'
+});
+
+consulta.hasOne(pacientes, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_PACIENTE'
+});
+
+pacientes.belongsTo(consulta, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_PACIENTE'
+});
+
+consulta.hasOne(motivo_consulta, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_MOTIVO_CONSULTA'
+});
+
+motivo_consulta.belongsTo(consulta, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_MOTIVO_CONSULTA'
 });
 
 module.exports.consulta = consulta;

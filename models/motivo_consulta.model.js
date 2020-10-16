@@ -2,12 +2,12 @@ const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const motivo_consulta = sequelize.define('motivo_consulta', {
-    id : Sequelize.INTEGER,
-    fecha_creacion: Sequelize.DATE,
-    descripcion   : Sequelize.STRING(500),
+    ID            : Sequelize.INTEGER,
+    FECHA_CREACION: Sequelize.DATE,
+    DESCRIPCION   : Sequelize.STRING(500),
 },{
     timestamps: false,
-    tableName : 'motivo_consulta'
+    tableName : 'MOTIVO_CONSULTA'
 });
 
 module.exports.motivo_consulta = motivo_consulta;

@@ -24,6 +24,13 @@ function decrypt(text) {
     return decrypted.toString();
 }
 
+function requestResult(code,data,res){
+    if (code === 200) return res.status(200).json({ mensaje: 'Satisfactorio', data: data });
+    else if (code === 404) return res.status(404).json({ mensaje: 'No se encontro registros', data: null});
+    else if (code === 400) return res.status(400).json({ mensaje: 'Error al procesar su solicitud', data: data});
+    else if (code === 500) return res.status(500).json({ mensaje: 'Error Servidor interno', data: data});
+}
+
 Array.prototype.forEachAsync = async function (fn) {
     for (let t of this) { await fn(t)}
 }
@@ -44,10 +51,10 @@ String.prototype.isNullOrEmpty = function() {
 }
 
 module.exports  = {
-    encrypt = encrypt,
-    decrypt              = decrypt,
-    underscore           = underscore,
-    lodash               = lodash,
-    SqlInjectionMethods  = SqlInjectionMethods,
-    logError             = logError,
+    encrypt             : encrypt,
+    decrypt             : decrypt,
+    underscore          : underscore,
+    lodash              : lodash,
+    SqlInjectionMethods : SqlInjectionMethods,
+    requestResult       : requestResult
 }

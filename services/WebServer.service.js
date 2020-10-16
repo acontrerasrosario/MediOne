@@ -35,23 +35,23 @@ function initialize(){
         app.use(morgan('combined')); // Combines logging info from request and response
         app.use(express.json()); // understand json request
         app.use(express.urlencoded({extended:true})); // understand json request
-        app.use(function(req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-            res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, OPTIONS");
-            res.header("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization");
+        // app.use(function(req, res, next) {
+        //     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+        //     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, OPTIONS");
+        //     res.header("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization");
 
-            next();
-        });
+        //     next();
+        // });
 
         const swaggerDocs = swaggerJsDoc(swaggerOptions);
         app.use('/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
-        app.get('/*', async (req, res) => {
-            res.redirect('/api-docs'); 
-        });
+        // app.get('/*', async (req, res) => {
+        //     res.redirect('/api-docs'); 
+        // });
 
         // API'S
-        app.use('/api/paciente',pacienteRoute);
+        app.use('/api/paciente', pacienteRoute);
 
         httpServer = http.createServer(app);
 

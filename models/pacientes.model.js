@@ -1,25 +1,36 @@
 const Sequelize = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
+const { tipo_sangre } = require('./tipo_sangre.model'); 
 
 const pacientes = sequelize.define('pacientes', {
-    id : {
+    ID : {
         type         : Sequelize.INTEGER,
         primaryKey   : true,
         autoIncrement: true
     },
-    cedula          : Sequelize.STRING(20),
-    primer_nombre   : Sequelize.STRING(150),
-    segundo_nombre  : Sequelize.STRING(150),
-    primer_apellido : Sequelize.STRING(150),
-    segundo_apellido: Sequelize.STRING(150),
-    fecha_nacimiento: Sequelize.DATEONLY,
-    pasaporte       : Sequelize.STRING(20),
-    fecha_creacion  : Sequelize.DATE,
-    tipo_sangre     : Sequelize.INTEGER,
-    estatus         : Sequelize.STRING(1)
+    CEDULA          : Sequelize.STRING(20),
+    PRIMER_NOMBRE   : Sequelize.STRING(150),
+    SEGUNDO_NOMBRE  : Sequelize.STRING(150),
+    PRIMER_APELLIDO : Sequelize.STRING(150),
+    SEGUNDO_APELLIDO: Sequelize.STRING(150),
+    FECHA_NACIMIENTO: Sequelize.DATEONLY,
+    PASAPORTE       : Sequelize.STRING(20),
+    FECHA_CREACION  : Sequelize.DATE,
+    TIPO_SANGRE     : Sequelize.INTEGER,
+    ESTATUS         : Sequelize.STRING(1)
 },{
     timestamps: false,
-    tableName: 'pacientes'
+    tableName: 'PACIENTES'
+});
+
+pacientes.hasOne(tipo_sangre, {
+    foreignKey: 'TIPO_SANGRE'
+    ,sourceKey: 'ID'
+});
+
+tipo_sangre.belongsTo(pacientes, {
+    foreignKey: 'TIPO_SANGRE',
+    sourceKey: 'ID'
 });
 
 module.exports.pacientes = pacientes;
