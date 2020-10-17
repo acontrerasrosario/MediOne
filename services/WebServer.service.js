@@ -38,7 +38,7 @@ function initialize(){
         app.use(express.urlencoded({extended:true})); // understand json request
 
         const swaggerDocs = swaggerJsDoc(swaggerOptions);
-        app.use('/api/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+        app.use('/api/docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
         app.use('/', express.static(main_path+'/'))
 
