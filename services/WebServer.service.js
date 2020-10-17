@@ -9,6 +9,7 @@ const cors         = require('cors')
 
 const webServerConfig = require('../config/WebServer.config');
 const pacienteRoute   = require('../routes/paciente.route');
+const consultaRoute   = require('../routes/consulta.route');
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -35,23 +36,19 @@ function initialize(){
         app.use(morgan('combined')); // Combines logging info from request and response
         app.use(express.json()); // understand json request
         app.use(express.urlencoded({extended:true})); // understand json request
-        // app.use(function(req, res, next) {
-        //     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-        //     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, OPTIONS");
-        //     res.header("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization");
-
-        //     next();
-        // });
 
         const swaggerDocs = swaggerJsDoc(swaggerOptions);
-        app.use('/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+        app.use('/api/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
-        // app.get('/*', async (req, res) => {
-        //     res.redirect('/api-docs'); 
-        // });
+        app.use('/', express.static(main_path+'/'))
 
         // API'S
         app.use('/api/paciente', pacienteRoute);
+        app.use('/api/consulta', consultaRoute);
+
+        app.get('/*', async (req, res) => {
+            res.sendFile(path.join(main_path+'/app/index.html'));
+        });
 
         httpServer = http.createServer(app);
 

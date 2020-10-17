@@ -2,7 +2,10 @@ const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const motivo_consulta = sequelize.define('motivo_consulta', {
-    ID            : Sequelize.INTEGER,
+    ID            : {
+        type         : Sequelize.INTEGER,
+        primaryKey   : true,
+    },
     FECHA_CREACION: Sequelize.DATE,
     DESCRIPCION   : Sequelize.STRING(500),
 },{

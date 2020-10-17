@@ -24,13 +24,13 @@ const pacientes = sequelize.define('pacientes', {
 });
 
 pacientes.hasOne(tipo_sangre, {
-    foreignKey: 'TIPO_SANGRE'
-    ,sourceKey: 'ID'
+    foreignKey: 'ID',
+    sourceKey: 'TIPO_SANGRE'
 });
 
 tipo_sangre.belongsTo(pacientes, {
-    foreignKey: 'TIPO_SANGRE',
-    sourceKey: 'ID'
+    foreignKey: 'ID',
+    sourceKey: 'TIPO_SANGRE'
 });
 
 module.exports.pacientes = pacientes;

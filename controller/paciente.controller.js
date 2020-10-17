@@ -60,7 +60,7 @@ async function obtener_informacion_paciente(req,res){
             ESTATUS         : paciente_result.ESTATUS,
         }
 
-        let tipoSangre_result = await tipo_sangre.findOne({ where: { ID: paciente_result.TIPO_SANGRE } });
+        let tipoSangre_result = await tipo_sangre.findOne({ where: { ID: (paciente_result.TIPO_SANGRE) } });
 
         result.paciente['TIPO_SANGRE'] = tipoSangre_result.nombre_corto;
 
@@ -70,7 +70,7 @@ async function obtener_informacion_paciente(req,res){
             if (!qty_consultas) qty_consultas = 15;
             if (qty_consultas > 50) qty_consultas = 50;
 
-            let consultas_result = consulta.findAll({
+            let consultas_result = await consulta.findAll({
                 where: { ID_PACIENTE: paciente_result.ID },
                 limit: qty_consultas,
                 order: [
@@ -88,10 +88,6 @@ async function obtener_informacion_paciente(req,res){
             result["consultas"] = consultas_result
 
         } 
-
-
-
-
 
         return requestResult(200,result,res);
     } catch (error) {

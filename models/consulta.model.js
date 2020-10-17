@@ -2,7 +2,7 @@ const Sequelize = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 const { pacientes } = require('./pacientes.model');
 const { motivo_consulta } = require('./motivo_consulta.model');
-
+const { personal_medico } = require('./personal_medico.model');
 
 const consulta = sequelize.define('consulta', {
     SECUENCIA: {
@@ -27,7 +27,7 @@ const consulta = sequelize.define('consulta', {
     NIVEL_GLUCOSA     : Sequelize.INTEGER,
     GLOBULOS_ROJOS    : Sequelize.FLOAT,
     GLOBULOS_BLANCOS  : Sequelize.FLOAT,
-    USER_ID           : Sequelize.INTEGER,
+    IDPERSONAL_MEDICO           : Sequelize.INTEGER,
     ID_MOTIVO_CONSULTA: Sequelize.INTEGER,
 },{
     timestamps: false,
@@ -50,8 +50,18 @@ consulta.hasOne(motivo_consulta, {
 });
 
 motivo_consulta.belongsTo(consulta, {
+    foreignKey: 'ID_MOTIVO_CONSULTA'
+    ,sourceKey: 'ID'
+});
+
+consulta.hasOne(personal_medico, {
     foreignKey: 'ID'
-    ,sourceKey: 'ID_MOTIVO_CONSULTA'
+    ,sourceKey: 'IDPERSONAL_MEDICO'
+});
+
+personal_medico.belongsTo(consulta, {
+    foreignKey: 'ID'
+    ,sourceKey: 'IDPERSONAL_MEDICO'
 });
 
 module.exports.consulta = consulta;

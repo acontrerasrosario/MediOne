@@ -6,7 +6,7 @@ const recetas = sequelize.define('recetas', {
     fecha         : Sequelize.DATEONLY,
     nota          : Sequelize.TEXT,
     id_paciente   : Sequelize.INTEGER,
-    user_id       : Sequelize.INTEGER,
+    IDPERSONAL_MEDICO       : Sequelize.INTEGER,
     medicamento1  : Sequelize.INTEGER,
     medicamento2  : Sequelize.INTEGER,
     medicamento3  : Sequelize.INTEGER,

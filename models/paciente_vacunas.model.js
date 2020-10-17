@@ -11,7 +11,7 @@ const paciente_vacunas = sequelize.define('paciente_vacunas', {
     idvacuna      : Sequelize.STRING(20),
     dosis         : Sequelize.FLOAT,
     id_paciente   : Sequelize.INTEGER,
-    user_id       : Sequelize.INTEGER,
+    IDPERSONAL_MEDICO       : Sequelize.INTEGER,
     fecha         : Sequelize.DATEONLY,
     refuerzo      : Sequelize.BOOLEAN,
 },{
