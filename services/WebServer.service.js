@@ -46,7 +46,7 @@ function initialize(){
         app.use('/api/paciente', pacienteRoute);
         app.use('/api/consulta', consultaRoute);
 
-        app.get('/*', async (req, res) => {
+        app.get('/', async (req, res) => {
             res.sendFile(path.join(main_path+'/app/index.html'));
         });
 
