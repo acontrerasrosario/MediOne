@@ -1,0 +1,16 @@
+# Configuracion de aplicacion
+APP_NAME = "MediOne"
+APP_HTTP_PORT = 3000
+
+# Configuracion de base de datos Aplicacion
+APP_DB_SERVER = 3.228.6.152
+APP_DB_NAME = "MediOne"
+APP_DB_USER = "postgres"
+APP_DB_PASS = "todobien"
+APP_DB_PORT = 5432
+APP_DB_MAX_CONCURRENT_QUERIES = 100
+APP_DB_POOL_MAX = 5
+APP_DB_POOL_MIN = 0
+APP_DB_POOL_REQUIRE = 30000
+APP_DB_POOL_IDLE = 10000
+APP_DB_LOG = FALSE
