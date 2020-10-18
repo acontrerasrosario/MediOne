@@ -2,6 +2,9 @@ const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 const { pacientes } = require('./pacientes.model');
 const { personal_medico } = require('./personal_medico.model');
+const { tipo_examen } = require('./tipo_examen.model');
+const { enfermedades } = require('./enfermedades.model');
+const { documentos_examen } = require('./documentos_examen.model');
 
 const examenes = sequelize.define('examenes', {
     SECUENCIA : {
@@ -23,12 +26,12 @@ const examenes = sequelize.define('examenes', {
 
 examenes.hasOne(pacientes, {
     foreignKey: 'ID'
-    ,sourceKey: 'ID_PACIENTE'
+    ,sourceKey: 'IDPACIENTE'
 });
 
 pacientes.belongsTo(examenes, {
     foreignKey: 'ID'
-    ,sourceKey: 'ID_PACIENTE'
+    ,sourceKey: 'IDPACIENTE'
 });
 
 examenes.hasOne(personal_medico, {
@@ -41,6 +44,34 @@ personal_medico.belongsTo(examenes, {
     ,sourceKey: 'IDPERSONAL_MEDICO'
 });
 
+examenes.hasOne(tipo_examen, {
+    foreignKey: 'ID'
+    ,sourceKey: 'IDTIPOEXAMEN'
+});
 
+tipo_examen.belongsTo(examenes, {
+    foreignKey: 'ID'
+    ,sourceKey: 'IDTIPOEXAMEN'
+});
+
+examenes.hasOne(enfermedades, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_ENFERMEDAD'
+});
+
+enfermedades.belongsTo(examenes, {
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_ENFERMEDAD'
+});
+
+examenes.hasOne(documentos_examen, {
+    foreignKey: 'ID'
+    ,sourceKey: 'IDDOCUMENTOS'
+});
+
+documentos_examen.belongsTo(examenes, {
+    foreignKey: 'ID'
+    ,sourceKey: 'IDDOCUMENTOS'
+});
 
 module.exports.examenes = examenes;

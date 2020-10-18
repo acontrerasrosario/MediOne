@@ -2,13 +2,16 @@ const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const parentescos = sequelize.define('parentescos', {
-    fecha_creacion: Sequelize.DATE,
-    grado         : Sequelize.STRING(50),
-    id            : Sequelize.INTEGER,
-    descripcion   : Sequelize.STRING(150),
+    FECHA_CREACION: Sequelize.DATE,
+    GRADO         : Sequelize.STRING(50),
+    ID            : {
+        type         : Sequelize.INTEGER,
+        primaryKey   : true,
+    },
+    DESCRIPCION   : Sequelize.STRING(150),
 },{
     timestamps: false,
-    tableName : 'parentescos'
+    tableName : 'PARENTESCO'
 });
 
 module.exports.parentescos = parentescos;

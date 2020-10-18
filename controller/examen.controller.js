@@ -1,10 +1,13 @@
 const { requestResult } = require('../services/helpers');
 const { pacientes } = require('../models/pacientes.model'); 
 const { examenes } = require('../models/examanes.model'); 
-const { motivo_consulta } = require('../models/motivo_consulta.model')
 const { personal_medico } = require('../models/personal_medico.model')
+const { tipo_examen } = require('../models/tipo_examen.model')
+const { documentos_examen } = require('../models/documentos_examen.model')
+const { formato_documentos } = require('../models/formato_documentos.model')
+const { enfermedades } = require('../models/enfermedades.model')
 
-async function obtener_informacion_consulta(req,res) {
+async function obtener_informacion_examen(req,res) {
     try {
         const 
         { 
@@ -15,7 +18,8 @@ async function obtener_informacion_consulta(req,res) {
         let 
         {
             incluir_doctor,
-            incluir_motivo_consulta,
+            incluir_enfermedad,
+            incluir_documento,
         } = req.query;
 
         if (!identificacion || identificacion.length < 4 || !id_examen) return requestResult(400,null,res);
@@ -23,8 +27,11 @@ async function obtener_informacion_consulta(req,res) {
         if (!incluir_doctor || (incluir_doctor == 'false')) incluir_doctor = false;
         else incluir_doctor = (incluir_doctor == 'true');
          
-        if (!incluir_motivo_consulta || (incluir_motivo_consulta == 'false')) incluir_motivo_consulta = false;
-        else incluir_motivo_consulta = (incluir_motivo_consulta == 'true');
+        if (!incluir_enfermedad || (incluir_enfermedad == 'false')) incluir_enfermedad = false;
+        else incluir_enfermedad = (incluir_enfermedad == 'true');
+
+        if (!incluir_documento || (incluir_documento == 'false')) incluir_documento = false;
+        else incluir_documento = (incluir_documento == 'true');
 
         let include_models = [];
 
@@ -51,6 +58,38 @@ async function obtener_informacion_consulta(req,res) {
             }
         })
 
+        include_models.push({
+            model: tipo_examen,
+            attributes: ['DESCRIPCION']
+        })
+
+        if (incluir_doctor) { 
+            include_models.push({
+                model: personal_medico,
+            });
+        }
+
+        if (incluir_enfermedad) { 
+            include_models.push({
+                model: enfermedades,
+                attributes: ['ID','DESCRIPCION']
+            });
+        }
+
+        if (incluir_documento) { 
+            include_models.push({
+                model: documentos_examen,
+                include: 
+                [
+                    {
+                        model: formato_documentos
+                    }
+                ]
+            });
+        }
+
+        
+
         let result = await examenes.findOne({
             where: { SECUENCIA: id_examen},
             include: include_models
@@ -66,7 +105,7 @@ async function obtener_informacion_consulta(req,res) {
 
 }
 
-async function obtener_informacion_consulta_paginado(req,res) {
+async function obtener_informacion_examen_paginado(req,res) {
     try {
         const 
         { 
@@ -74,7 +113,6 @@ async function obtener_informacion_consulta_paginado(req,res) {
             qntity,
             page,
         } = req.query;
-
 
         let _offset = (page - 1) * qntity;
 
@@ -111,20 +149,6 @@ async function obtener_informacion_consulta_paginado(req,res) {
                 }
         });
 
-        if (incluir_doctor) { 
-            include_models.push({
-                model: personal_medico,
-            });
-        }
-
-        if (incluir_motivo_consulta) {
-            include_models.push({
-                model: motivo_consulta,
-                attributes: ['DESCRIPCION'],
-            });
-        }
-
-
         let result = await consulta.findAll({
             offset: _offset,
             limit: qntity,
@@ -142,6 +166,6 @@ async function obtener_informacion_consulta_paginado(req,res) {
 }
 
 module.exports = {
-    obtener_informacion_consulta: obtener_informacion_consulta,
-    obtener_informacion_consulta_paginado: obtener_informacion_consulta_paginado,
+    obtener_informacion_examen: obtener_informacion_examen,
+    obtener_informacion_examen_paginado: obtener_informacion_examen_paginado,
 }

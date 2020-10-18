@@ -8,8 +8,12 @@ const swaggerUI    = require('swagger-ui-express')
 const cors         = require('cors')
 
 const webServerConfig = require('../config/WebServer.config');
+
 const pacienteRoute   = require('../routes/paciente.route');
 const consultaRoute   = require('../routes/consulta.route');
+const examenRoute   = require('../routes/examen.route');
+const catalogoRoute   = require('../routes/catalogo.route');
+
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -45,6 +49,8 @@ function initialize(){
         // API'S
         app.use('/api/paciente', pacienteRoute);
         app.use('/api/consulta', consultaRoute);
+        app.use('/api/examen', examenRoute);
+        app.use('/api/catalogo', catalogoRoute);
 
         app.get('/', async (req, res) => {
             res.sendFile(path.join(main_path+'/app/index.html'));

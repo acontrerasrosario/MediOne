@@ -1,19 +1,18 @@
 const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
-const paises = sequelize.define('paises', {
+const tipo_examen = sequelize.define('tipo_examen', {
     FECHA_CREACION: Sequelize.DATE,
-    pais_id       : {
+    ID            :{
         type         : Sequelize.INTEGER,
         primaryKey   : true,
         autoIncrement: true
     },
-    iso           : Sequelize.STRING(20),
-    nicename      : Sequelize.STRING(300),
-    iso3          : Sequelize.STRING(20),
+    DESCRIPCION   : Sequelize.STRING(500),
+    CATEGORIA     : Sequelize.STRING(300),
 },{
     timestamps: false,
-    tableName : 'PAISES'
+    tableName : 'TIPO_EXAMEN'
 });
 
-module.exports.paises = paises;
+module.exports.tipo_examen = tipo_examen;

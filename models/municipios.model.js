@@ -2,13 +2,17 @@ const Sequelize = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const municipios = sequelize.define('municipios', {
-    municipioid   : Sequelize.INTEGER,
-    provinceid    : Sequelize.INTEGER,
+    municipioID   : {
+        type         : Sequelize.INTEGER,
+        primaryKey   : true,
+        autoIncrement: true
+    },
+    provinceID    : Sequelize.INTEGER,
     name          : Sequelize.STRING(300),
-    fecha_creacion: Sequelize.DATE,
+    FECHA_CREACION: Sequelize.DATE,
 },{
     timestamps: false,
-    tableName: 'municipios'
+    tableName: 'MUNICIPIOS'
 });
 
 module.exports.municipios = municipios;

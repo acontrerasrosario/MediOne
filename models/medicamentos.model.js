@@ -2,20 +2,20 @@ const Sequelize     = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const medicamentos = sequelize.define('medicamentos', {
-    id            : {
+    ID            : {
         type         : Sequelize.INTEGER,
         primaryKey   : true,
         autoIncrement: true
     },
-    fecha_creacion: Sequelize.DATE,
-    descripcion   : Sequelize.TEXT,
-    estatus: Sequelize.STRING(1),
-    identificacion_medicamento: Sequelize.STRING(250),
-    forma_fisica: Sequelize.TEXT,
-    presentacion: Sequelize.TEXT,
+    FECHA_CREACION            : Sequelize.DATE,
+    DESCRIPCION               : Sequelize.TEXT,
+    ESTATUS                   : Sequelize.STRING(1),
+    IDENTIFICACION_MEDICAMENTO: Sequelize.STRING(250),
+    FORMA_FISICA              : Sequelize.TEXT,
+    PRESENTACION              : Sequelize.TEXT,
 },{
     timestamps: false,
-    tableName : 'medicamentos'
+    tableName : 'MEDICAMENTOS'
 });
 
 module.exports.medicamentos = medicamentos;

@@ -2,12 +2,15 @@ const Sequelize = require("sequelize")
 const { sequelize } = require('../services/postgres.service');
 
 const enfermedades = sequelize.define('enfermedades', {
-    id                    : Sequelize.STRING(20),
-    descripcion_documentos: Sequelize.TEXT,
-    fecha_creacion        : Sequelize.DATE,
+    ID                    : {
+        type     : Sequelize.STRING(20),
+        primaryKey   : true,
+    },
+    DESCRIPCION: Sequelize.TEXT,
+    FECHA_CREACION        : Sequelize.DATE,
 },{
     timestamps: false,
-    tableName: 'enfermedades'
+    tableName: 'ENFERMEDADES'
 });
 
 module.exports.enfermedades = enfermedades;

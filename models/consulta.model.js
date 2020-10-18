@@ -50,8 +50,8 @@ consulta.hasOne(motivo_consulta, {
 });
 
 motivo_consulta.belongsTo(consulta, {
-    foreignKey: 'ID_MOTIVO_CONSULTA'
-    ,sourceKey: 'ID'
+    foreignKey: 'ID'
+    ,sourceKey: 'ID_MOTIVO_CONSULTA'
 });
 
 consulta.hasOne(personal_medico, {
