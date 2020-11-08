@@ -8,39 +8,40 @@ const
 /**
  * @swagger
  * /api/paciente/obtener_informacion_paciente:
- *  post: 
+ *  get: 
  *   tags: 
  *    - Pacientes 
  *   description: Usado para solicitar informacion de un paciente
  *   parameters:
- *      -   in: body
- *          description: objeto con el cual se hace la solicitud de informacion
- *          name: solicitud
- *          required:
- *              - identificacion
- *              - cargar_consultas
- *          properties:
- *              identificacion:
- *                  type: string
- *                  default: null
- *                  example: "604634442"
- *                  description: Cedula / Pasaporte del paciente           
- *              cargar_consultas:
- *                  type: boolean
- *                  default: false
- *                  example: false
- *                  description: Opcion para cargar las consultas
- *              qty_consultas:
- *                  type: integer
- *                  default: 10
- *                  example: 10
- *                  description: Cantidad de consultas a cargar (no puede ser mayor a 50)                
- *              orderBy_consultas:
- *                  type: string
- *                  enum: [ASC,DESC]
- *                  default: ASC
- *                  example: ASC
- *                  description: Orden de obtencion de las consultas        
+ *      -   in: query
+ *          description: Cedula / Pasaporte del paciente  
+ *          name: identificacion
+ *          required: true
+ *          schema:
+ *              type: string
+ *              example: "604634442"
+ *      -   in: query 
+ *          description: Opcion para cargar las consultas       
+ *          name: cargar_consultas
+ *          schema:
+ *              type: boolean
+ *              default: false
+ *              example: false
+ *      -   in: query 
+ *          description: Cantidad de consultas a cargar (no puede ser mayor a 50)    
+ *          name: qty_consultas
+ *          schema:
+ *              type: integer
+ *              default: 10
+ *              example: 10                
+ *      -   in: query 
+ *          description: Orden de obtencion de las consultas   
+ *          name: orderBy_consultas
+ *          schema:
+ *              type: string
+ *              enum: [ASC,DESC]
+ *              default: ASC
+ *              example: ASC        
  *   responses:
  *      '200':
  *          description: Una respuesta satisfactoria

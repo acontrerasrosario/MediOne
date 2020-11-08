@@ -11,10 +11,17 @@ async function obtener_informacion_paciente(req,res){
         const 
         { 
             identificacion,
+        } = req.query;
+
+        let 
+        {
             cargar_consultas,
             qty_consultas,
             orderBy_consultas,
-        } = req.body;
+        } = req.query
+
+        if (!cargar_consultas || (cargar_consultas == 'false')) cargar_consultas = false;
+        else cargar_consultas = (cargar_consultas == 'true');
 
         if (!identificacion || identificacion.length < 4) return requestResult(400,null,res);
 
